@@ -30,15 +30,16 @@ app_ui = ui.page_fluid(
                 min=5,
                 max=50,
                 value=20
-            )
+            ),
+            ui.a("🔗 GitHub Repo", href="https://github.com/sabrouch36/cintel-03-reactive", target="_blank")  # ✅ رابط GitHub هنا
         ),
         ui.div(
-            ui.h2("CC3.2 - Penguin Dashboard"),
+            ui.h2("CC3.3 - Penguin Dashboard"),
             ui.output_text_verbatim("filtered_count"),
             ui.output_data_frame("filtered_table"),
             ui.output_plot("mass_histogram"),
             ui.output_plot("pie_chart"),
-            ui.output_plot("seaborn_histogram")  # ✅ Seaborn Histogram
+            ui.output_plot("seaborn_histogram")
         )
     )
 )
@@ -68,7 +69,14 @@ def server(input, output, session):
     def mass_histogram():
         df = filtered_data()
         fig, ax = plt.subplots()
-        sns.histplot(data=df, x="body_mass_g", hue="species", multiple="stack", ax=ax)
+        sns.histplot(
+            data=df,
+            x="body_mass_g",
+            hue="species",                
+            multiple="stack",
+            palette="Set2",               
+            ax=ax
+        )
         ax.set_title("Body Mass Distribution")
         ax.set_xlabel("Body Mass (g)")
         ax.set_ylabel("Count")
@@ -79,7 +87,12 @@ def server(input, output, session):
     def pie_chart():
         df = filtered_data()
         fig, ax = plt.subplots()
-        df["species"].value_counts().plot.pie(autopct='%1.1f%%', ax=ax)
+        colors = ["#66c2a5", "#fc8d62", "#8da0cb"]       
+        df["species"].value_counts().plot.pie(
+            autopct='%1.1f%%',
+            colors=colors,
+            ax=ax
+        )
         ax.set_title("Species Distribution")
         ax.set_ylabel("")
         return fig
@@ -94,6 +107,8 @@ def server(input, output, session):
             x="flipper_length_mm",
             bins=input.seaborn_bin_count(),
             kde=True,
+            color="darkorange",         
+            edgecolor="black",
             ax=ax
         )
         ax.set_title("Seaborn Histogram: Flipper Length")
