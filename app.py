@@ -3,10 +3,10 @@ from palmerpenguins import load_penguins
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# 🔗 GitHub Repo: https://github.com/sabrouch36/cintel-03-reactive
-
+# Load the dataset
 penguins_df = load_penguins()
 
+# UI Layout
 app_ui = ui.page_fluid(
     ui.layout_sidebar(
         ui.sidebar(
@@ -23,18 +23,27 @@ app_ui = ui.page_fluid(
                 min=170,
                 max=235,
                 value=180
+            ),
+            ui.input_slider(
+                id="seaborn_bin_count",
+                label="Seaborn Histogram Bins",
+                min=5,
+                max=50,
+                value=20
             )
         ),
         ui.div(
-            ui.h2("CC3.1 - Penguin Dashboard"),
+            ui.h2("CC3.2 - Penguin Dashboard"),
             ui.output_text_verbatim("filtered_count"),
             ui.output_data_frame("filtered_table"),
             ui.output_plot("mass_histogram"),
-            ui.output_plot("pie_chart")
+            ui.output_plot("pie_chart"),
+            ui.output_plot("seaborn_histogram")  # ✅ Seaborn Histogram
         )
     )
 )
 
+# Server Logic
 def server(input, output, session):
 
     @reactive.calc
@@ -75,4 +84,22 @@ def server(input, output, session):
         ax.set_ylabel("")
         return fig
 
+    @output
+    @render.plot
+    def seaborn_histogram():
+        df = filtered_data()
+        fig, ax = plt.subplots()
+        sns.histplot(
+            data=df,
+            x="flipper_length_mm",
+            bins=input.seaborn_bin_count(),
+            kde=True,
+            ax=ax
+        )
+        ax.set_title("Seaborn Histogram: Flipper Length")
+        ax.set_xlabel("Flipper Length (mm)")
+        ax.set_ylabel("Count")
+        return fig
+
+# Run the app
 app = App(app_ui, server)
