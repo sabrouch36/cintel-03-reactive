@@ -1,66 +1,46 @@
-# cintel-03-reactive
-# CC3.1 – Reactive Filtering with PyShiny
+# 🐧 Cintel-03 Reactive Penguin Dashboard
 
-This project demonstrates reactive data filtering using PyShiny and the `palmerpenguins` dataset.  
-It includes user inputs like checkboxes, a slider, dynamic filtering, a data table, and interactive charts.
+This interactive web application was built using **Shiny for Python (PyShiny)**. It allows users to explore the **Palmer Penguins dataset** with reactive filters and dynamic visualizations.
 
-## 🔗 GitHub Repository
-[https://github.com/sabrouch36/cintel-03-reactive](https://github.com/sabrouch36/cintel-03-reactive)
+## 🔍 Features
 
----
+- **Reactive Filtering** based on:
+  - Species (Adelie, Chinstrap, Gentoo)
+  - Island (Torgersen, Biscoe, Dream)
+  - Minimum flipper length (slider)
+- **Data Table**: View filtered penguin data
+- **Visualizations**:
+  - Stacked Histogram of body mass
+  - Pie chart showing species distribution
+  - Histogram of flipper length with KDE
+  - New: Scatter plot comparing bill length vs flipper length
+- **Modern layout** using `ui.card`, `ui.layout_columns`, and visual polish
 
-## 📊 Features
+## 🚀 How to Run
 
-- ✅ Sidebar with checkbox input (species selection)
-- ✅ Slider to filter by minimum flipper length
-- ✅ Reactive data filtering using `@reactive.calc`
-- ✅ Data table (updated live)
-- ✅ Histogram (Seaborn)
-- ✅ Pie chart (matplotlib/pandas)
+1. Visit the Shiny Playground: [https://shinylive.io/py/](https://shinylive.io/py/)
+2. Paste the contents of `app.py` and `requirements.txt`
+3. Run the app and interact with the sidebar filters
 
----
+## 📂 Repository Contents
 
-## 🧠 Technologies Used
+- `app.py` – Main application logic
+- `requirements.txt` – Extra packages used (only `plotly`)
+- `screenshot1.png` – App before filter change
+- `screenshot2.png` – App after applying filters
+- `README.md` – Project description
 
-- Python
-- [PyShiny](https://shiny.posit.co/py/)
-- matplotlib
-- seaborn
-- pandas
-- palmerpenguins
+## 🔗 Links
 
----
+- [GitHub Repo](https://github.com/sabrouch36/cintel-03-reactive)
 
-## 📁 File Structure
+## 🏆 Bonus (Exploration)
 
-cintel-03-reactive/
-│
-├── app.py # Main PyShiny app
-├── README.md # Project overview
-└── requirements.txt # List of required packages
+- Added extra filtering by island
+- Added scatterplot visualization
+- Enhanced UI with icons and layout
 
+## 📚 Dataset
 
----
-
-## ▶️ How to Run
-
-1. Open the project in [Shiny Playground](https://shiny.posit.co/py/)
-2. Paste the contents of `app.py`
-3. Run the app and interact with the sidebar controls!
-
----
-
-## 📸 Screenshot
-
-*Include a screenshot of the running app here when you upload to GitHub.*
-
----
-
-## 👨‍🎓 Author
-
-**Sabri Hamdaoui**  
-Northwest Missouri State University – Data Analytics Track  
-Module: CC3.1 – Reactivity and Filtering
-
----
-
+Palmer Penguins dataset via `palmerpenguins` package  
+Source: [https://allisonhorst.github.io/palmerpenguins/](https://allisonhorst.github.io/palmerpenguins/)
